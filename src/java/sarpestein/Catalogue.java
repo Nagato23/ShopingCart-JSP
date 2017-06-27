@@ -18,8 +18,22 @@ public class Catalogue {
         DBHelper  db = new DBHelper();
         String query = "SELECT * FROM catalogue";
         
-        return db.ExecuteQuery(query);
-    }
+        ResultSet set = db.ExecuteQuery(query);
+        
+        try
+        {
+            while(set.next())
+            {
+                System.err.println(set.getString("type"));
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return set;
+   }
     
     
     public String[] GetMatchedItemsId(String deviceType, String brandName, double ramSize, double storageSize,

@@ -1,3 +1,9 @@
+<%@include file="HeaderLibrary.jsp" %>
+
+<%@ page import="sarpestein.DBHelper" %>
+<%
+    int totalItems = 0;
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,6 +23,8 @@
         <!-- custom CSS here -->
         <link href="assets/css/style.css" rel="stylesheet" />
     </head>
+    
+    
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -36,8 +44,8 @@
 
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Signup</a></li>
+                        <li data-toggle="modal" data-target="#loginModal"><a href="#">Login</a></li>
+                        <li data-toggle="modal" data-target="#registerModal"><a href="#">Signup</a></li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact us <b class="caret"></b></a>
@@ -80,61 +88,61 @@
                             <ul>
 
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/1.jpg" alt="img01"><h4>Boots</h4>
+                                        <img src="assets/ItemSlider/images/lenovo1.jpg" alt="img01"><h4>Aspire 0ne</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/2.jpg" alt="img02"><h4>Oxfords</h4>
+                                        <img src="assets/ItemSlider/images/lenovo2.jpg" alt="img02"><h4>Aspire 0ne</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/3.jpg" alt="img03"><h4>Loafers</h4>
+                                        <img src="assets/ItemSlider/images/lenovo3.jpg" alt="img03"><h4>Aspire 0ne</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/4.jpg" alt="img04"><h4>Sneakers</h4>
-                                    </a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="#">
-                                        <img src="assets/ItemSlider/images/5.jpg" alt="img05"><h4>Belts</h4>
-                                    </a></li>
-                                <li><a href="#">
-                                        <img src="assets/ItemSlider/images/6.jpg" alt="img06"><h4>Hats &amp; Caps</h4>
-                                    </a></li>
-                                <li><a href="#">
-                                        <img src="assets/ItemSlider/images/7.jpg" alt="img07"><h4>Sunglasses</h4>
-                                    </a></li>
-                                <li><a href="#">
-                                        <img src="assets/ItemSlider/images/8.jpg" alt="img08"><h4>Scarves</h4>
+                                        <img src="assets/ItemSlider/images/lenovo4.jpg" alt="img04"><h4>Aspire 0ne</h4>
                                     </a></li>
                             </ul>
                             <ul>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/9.jpg" alt="img09"><h4>Casual</h4>
+                                        <img src="assets/ItemSlider/images/acer1.jpg" alt="img05"><h4>Inspiron</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/10.jpg" alt="img10"><h4>Luxury</h4>
+                                        <img src="assets/ItemSlider/images/acer2.jpg" alt="img06"><h4>Inspiron</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/11.jpg" alt="img11"><h4>Sport</h4>
+                                        <img src="assets/ItemSlider/images/acer3.jpg" alt="img07"><h4>Inspiron</h4>
+                                    </a></li>
+                                <li><a href="#">
+                                        <img src="assets/ItemSlider/images/acer4.jpg" alt="img08"><h4>Inspiron</h4>
                                     </a></li>
                             </ul>
                             <ul>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/12.jpg" alt="img12"><h4>Carry-Ons</h4>
+                                        <img src="assets/ItemSlider/images/samsung1.jpg" alt="img09"><h4>Core</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/13.jpg" alt="img13"><h4>Duffel Bags</h4>
+                                        <img src="assets/ItemSlider/images/samsung2.jpg" alt="img10"><h4>Core</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/14.jpg" alt="img14"><h4>Laptop Bags</h4>
+                                        <img src="assets/ItemSlider/images/samsung3.jpg" alt="img11"><h4>Core</h4>
+                                    </a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="#">
+                                        <img src="assets/ItemSlider/images/hp1.jpg" alt="img12"><h4>Celerom</h4>
                                     </a></li>
                                 <li><a href="#">
-                                        <img src="assets/ItemSlider/images/15.jpg" alt="img15"><h4>Briefcases</h4>
+                                        <img src="assets/ItemSlider/images/hp2.jpg" alt="img13"><h4>Pro Book</h4>
+                                    </a></li>
+                                <li><a href="#">
+                                        <img src="assets/ItemSlider/images/hp3.jpg" alt="img14"><h4>EliteBook</h4>
+                                    </a></li>
+                                <li><a href="#">
+                                        <img src="assets/ItemSlider/images/hp4.jpg" alt="img15"><h4>Inspiron</h4>
                                     </a></li>
                             </ul>
                             <nav>
                                 <a href="#">Lenovo</a>
                                 <a href="#">Acer</a>
-                                <a href="#">Toshiba</a>
+                                <a href="#">Samsung</a>
                                 <a href="#">Hp</a>
                             </nav>
                         </div>
@@ -180,14 +188,34 @@
                         <a href="#" class="list-group-item active">Products
                         </a>
                         <ul class="list-group">
-
-                            <li class="list-group-item">Laptops
-                                <span class="label label-primary pull-right">234</span>
+                            <% 
+                            
+                                String mainQuery = "SELECT DISTINCT (type) FROM catalogue";
+                                ResultSet mainSet = st.executeQuery(mainQuery);
+                                ResultSet set;
+                            %>
+                            
+                            <% while(mainSet.next()) { %>
+                            
+                            <li class="list-group-item">
+                                <%= mainSet.getString("type") %>
+                                
+                                <span class="label label-primary pull-right">
+                                    <% 
+                                        query = String.format("SELECT COUNT(*) AS total FROM catalogue WHERE type = '%s';", 
+                                                mainSet.getString("type"));
+                                        
+                                        set = st2.executeQuery(query);
+                                        
+                                        while(set.next())
+                                        {
+                                            out.println(set.getString("total"));
+                                        }
+                                    %>
+                                </span>
                             </li>
-
-                            <li class="list-group-item">Tablets
-                                <span class="label label-danger pull-right">4</span>
-                            </li>
+                            
+                            <% } %>
                         </ul>
                     </div>
                     <!-- /.div -->
@@ -196,26 +224,31 @@
                         <a href="#" class="list-group-item active list-group-item-success">Brands
                         </a>
                         <ul class="list-group">
-
-                            <li class="list-group-item">Toshiba
-                                <span class="label label-danger pull-right">300</span>
+                            <%
+                                mainQuery = "SELECT DISTINCT brandName FROM catalogue";
+                                mainSet = st.executeQuery(mainQuery);
+                                
+                                while(mainSet.next()) {
+                            %>
+                            <li class="list-group-item">
+                                <%= mainSet.getString("brandName") %>
+                                <span class="label label-danger pull-right">
+                                    <%
+                                        query = String.format("SELECT COUNT(*) AS total FROM catalogue WHERE brandName ='%s' ",
+                                                mainSet.getString("brandName"));
+                                        //out.println(query);
+                                        set = st2.executeQuery(query);
+                                        
+                                        while(set.next())
+                                        {
+                                            totalItems += Integer.parseInt(set.getString("total"));
+                                            out.println(set.getString("total"));
+                                        }
+                                    %>
+                                </span>
                             </li>
-                            <li class="list-group-item">Lenovo
-                                <span class="label label-success pull-right">340</span>
-                            </li>
-                            <li class="list-group-item">Acer
-                                <span class="label label-info pull-right">735</span>
-                            </li>
-
-                            <li class="list-group-item">Hp
-                                <span class="label label-danger pull-right">300</span>
-                            </li>
-                            <li class="list-group-item">Techno
-                                <span class="label label-success pull-right">340</span>
-                            </li>
-                            <li class="list-group-item">Sony
-                                <span class="label label-info pull-right">735</span>
-                            </li>
+                            
+                            <% } %>
                         </ul>
                     </div>                
                     <!-- /.div -->
@@ -234,7 +267,7 @@
                     <!-- /.div -->
                     <div class="row">
                         <div class="btn-group alg-right-pad">
-                            <button type="button" class="btn btn-default"><strong>1235  </strong>items</button>
+                            <button type="button" class="btn btn-default"><strong><%= totalItems%> </strong>items</button>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
                                     Sort Products &nbsp;
@@ -254,20 +287,45 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
-
+                        
+                        <% 
+                            query = "SELECT * FROM catalogue;";
+                            
+                            mainSet = st.executeQuery(query);
+                            int count = 0;
+                            
+                            while(mainSet.next()) {
+                                
+                        %>
+                        
                         <div class="col-md-4 text-center col-sm-6 col-xs-6">
                             <div class="thumbnail product-box">
-                                <img src="assets/img/dummyimg.png" alt="" />
+                                <img src="<% out.print(String.format("assets/img/%s", mainSet.getString("picturePath"))); %>" alt="" />
+                                <hr class="padding: 0 50px 0 50px;">
                                 <div class="caption">
-                                    <h3><a href="#">Samsung Galaxy </a></h3>
-                                    <p>Price : <strong>N 3,45,900</strong>  </p>
-                                    <p><a href="#">Ptional dismiss button </a></p>
-                                    <p>Ptional dismiss button in tional dismiss button in   </p>
+                                    <h3>
+                                        <a href="#">
+                                            <% 
+                                                out.println(mainSet.getString("brandName") + " " 
+                                                        + ((mainSet.getString("model") == null) ? "" : mainSet.getString("model"))); 
+                                            %>
+                                        </a>
+                                    </h3>
+                                            <p>Price : <strong>N <%= mainSet.getString("cost") %></strong>  </p>
+                                    <p>
+                                        Supplier: <a href="#"><%= mainSet.getString("supplier") %></a> <br>
+                                        RAM: <a href="#"><%= mainSet.getString("ram") + " GB" %></a> <br>
+                                        Storage Size: <a href="#"><%= mainSet.getString("storageSize") + " GB" %></a> <br>
+                                    </p>
                                     <p><a href="#" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col -->
+                        
+                        <% count++; } %>
+                        
+<!--                        
+                         /.col 
                         <div class="col-md-4 text-center col-sm-6 col-xs-6">
                             <div class="thumbnail product-box">
                                 <img src="assets/img/dummyimg.png" alt="" />
@@ -280,7 +338,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col -->
+                         /.col 
                         <div class="col-md-4 text-center col-sm-6 col-xs-6">
                             <div class="thumbnail product-box">
                                 <img src="assets/img/dummyimg.png" alt="" />
@@ -292,7 +350,7 @@
                                     <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -385,6 +443,97 @@
         </div>
         <!-- /.col -->
 
+
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="signinLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+              </div>
+              <div class="modal-body">
+
+                <!-- Modal Body -->
+                <div>
+                     
+                    <form action="" method="post">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control input-sm" id="exampleInputEmail" name="email" placeholder="Enter email">
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputPassword">Password</label>
+                          <input type="password" class="form-control input-sm" id="exampleInputPassword" name="password" placeholder="Enter password">
+                        </div>
+                        <br>
+                        
+                        <button type="submit" class="btn btn-danger pull-left">Sign in</button>
+                    </form>
+                    <br><br><br>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <p class="text-center">
+                      <strong>&copy; Powered by Java group 1</strong>
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="signinLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Sign up</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- Modal Body -->
+                        <div>
+
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control input-sm" id="exampleInputEmail" name="email" placeholder="Enter email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword">Password</label>
+                                    <input type="password" class="form-control input-sm" id="exampleInputPassword" name="password" placeholder="Enter password">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control input-sm" id="exampleInputEmail" name="email" placeholder="Enter email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword">Password</label>
+                                    <input type="password" class="form-control input-sm" id="exampleInputPassword" name="password" placeholder="Enter password">
+                                </div>
+                                
+                                <br><br>
+
+                                <button type="submit" class="btn btn-danger pull-left">Sign in</button>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center">
+                            <strong>&copy; Powered by Java group 1</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
         <!--Footer end -->
         <!--Jquery file  -->
         <script src="assets/js/jquery-1.10.2.js"></script>
