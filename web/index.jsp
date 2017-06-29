@@ -18,24 +18,24 @@
                     <ul>
 
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/lenovo1.jpg" alt="img01"><h4>Aspire 0ne</h4>
+                                <img src="assets/ItemSlider/images/lenovo1.jpg" alt="img01"><h4> Burst pz</h4>
                             </a></li>
                         <li><a href="#">
                                 <img src="assets/ItemSlider/images/lenovo2.jpg" alt="img02"><h4>Aspire 0ne</h4>
                             </a></li>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/lenovo3.jpg" alt="img03"><h4>Aspire 0ne</h4>
+                                <img src="assets/ItemSlider/images/lenovo3.jpg" alt="img03"><h4>Solo</h4>
                             </a></li>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/lenovo4.jpg" alt="img04"><h4>Aspire 0ne</h4>
+                                <img src="assets/ItemSlider/images/lenovo4.jpg" alt="img04"><h4>Aspire Z</h4>
                             </a></li>
                     </ul>
                     <ul>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/acer1.jpg" alt="img05"><h4>Inspiron</h4>
+                                <img src="assets/ItemSlider/images/acer1.jpg" alt="img05"><h4>Inspiron 1</h4>
                             </a></li>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/acer2.jpg" alt="img06"><h4>Inspiron</h4>
+                                <img src="assets/ItemSlider/images/acer2.jpg" alt="img06"><h4>Acer lever</h4>
                             </a></li>
                         <li><a href="#">
                                 <img src="assets/ItemSlider/images/acer3.jpg" alt="img07"><h4>Inspiron</h4>
@@ -46,13 +46,13 @@
                     </ul>
                     <ul>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/samsung1.jpg" alt="img09"><h4>Core</h4>
+                                <img src="assets/ItemSlider/images/samsung1.jpg" alt="img09"><h4>Core Duo</h4>
                             </a></li>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/samsung2.jpg" alt="img10"><h4>Core</h4>
+                                <img src="assets/ItemSlider/images/samsung2.jpg" alt="img10"><h4>Slim J</h4>
                             </a></li>
                         <li><a href="#">
-                                <img src="assets/ItemSlider/images/samsung3.jpg" alt="img11"><h4>Core</h4>
+                                <img src="assets/ItemSlider/images/samsung3.jpg" alt="img11"><h4>Epic</h4>
                             </a></li>
                     </ul>
                     <ul>

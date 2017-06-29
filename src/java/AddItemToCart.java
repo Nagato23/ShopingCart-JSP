@@ -94,6 +94,90 @@ public class AddItemToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        //return all checked items
+        HttpSession session = request.getSession();
+
+        String itemsString = session.getAttribute("cartDetails").toString();
+        //(id:%s-price:%s);
+        String[] items = itemsString.split(";");
+        String finalText = "";
+        
+        for (String item : items) {
+            String id = "";
+            String price = "";
+
+            id = item.replace("(", "").replace(")", "").split("-")[0].split(":")[1];
+            price = item.replace("(", "").replace(")", "").split("-")[1].split(":")[1];
+
+            DBHelper db = new DBHelper();
+            ResultSet set = db.ExecuteQuery("SELECT * FROM catalogue WHERE id = " + id);
+            
+            try 
+            {
+                while (set.next()) {
+                    
+                    
+                    if(set.getString("type").toLowerCase().equals("laptop"))
+                    {
+                        
+                    
+                        finalText += String.format("<div class=\"row\">\n" +
+                                "<div class=\"col-md-3\">\n" +
+                                "<img src=\"assets/img/%s\">\n" +
+                                "</div>\n" +
+                                "<div class=\"col-md-9\">\n" +
+                                "<h3 id=\"items-title\">%s</h3>\n" +
+                                "<p>\n" +
+                                "Supplier: <a href=\"\" id=\"items-supplier\"> %s </a> <br>\n" +
+                                "RAM: <a href=\"\"  id=\"items-ram\"> %s</a> <br>\n" +
+                                "Storage Size: <a href=\"\"  id=\"items-storage-size\"> %s</a> <br>\n" +
+                                "Screen Size: <a href=\"\" id=\"items-screen-size\"> %s</a>\"\n" +
+                                "</p>\n" +
+                                "</div>\n" +
+                                "</div>\n" +
+                                "<hr>",
+                                "laptops/" + set.getString("picturePath") ,
+                                set.getString("brandName") + " " + ((set.getString("model") == null) ? "" : set.getString("model")),
+                                "N " + set.getString("cost"),
+                                set.getString("supplier"),
+                                set.getString("ram") + "GB",
+                                set.getString("StorageSize") + "GB",
+                                set.getString("screenSize") + "GB");
+                    }
+                    else
+                    {
+                        //
+                        finalText += String.format("<div class=\"row\">\n"
+                                + "<div class=\"col-md-3\">\n"
+                                + "<img src=\"assets/img/%s\">\n"
+                                + "</div>\n"
+                                + "<div class=\"col-md-9\">\n"
+                                + "<h3 id=\"items-title\">%s</h3>\n"
+                                + "<p>\n"
+                                + "Supplier: <a href=\"\" id=\"items-supplier\"> %s </a> <br>\n"
+                                + "RAM: <a href=\"\"  id=\"items-ram\"> %s</a> <br>\n"
+                                + "Storage Size: <a href=\"\"  id=\"items-storage-size\"> %s</a> <br>\n"
+                                + "Screen Size: <a href=\"\" id=\"items-screen-size\"> %s</a>\"\n"
+                                + "</p>\n"
+                                + "</div>\n"
+                                + "</div>\n"
+                                + "<hr>",
+                                "laptops/" + set.getString("picturePath"),
+                                set.getString("brandName") + " " + ((set.getString("model") == null) ? "" : set.getString("model")),
+                                "N " + set.getString("cost"),
+                                set.getString("supplier"),
+                                set.getString("ram") + "GB",
+                                set.getString("StorageSize") + "GB",
+                                set.getString("screenSize") + "GB");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**

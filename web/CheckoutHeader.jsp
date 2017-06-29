@@ -21,8 +21,8 @@
         <!-- custom scripts -->
         <script src="assets/js/sarpestein.js"></script>
     </head>
-    
-    
+
+
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -43,24 +43,22 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li id="loginBtn" data-toggle="modal" data-target="#loginModal"><a href="#">
-                                <% 
-                                    try
-                                    {
-                                        session = request.getSession(false);
-                                        if ( !(session.getAttribute("cart") == null) ) {
-                                            out.println(session.getAttribute("cart"));
-                                        }
-                                        else
-                                        {
-                                            out.println("Login");
-                                        }
-                                    }
-                                    catch (Exception ex) { out.println("Login"); }
+                                <%
+//                                    try {
+//                                        session = request.getSession(false);
+//                                        if (!(session.getAttribute("cart") == null)) {
+//                                            out.println(session.getAttribute("cart"));
+//                                        } else {
+//                                            out.println("Login");
+//                                        }
+//                                    } catch (Exception ex) {
+//                                        out.println("Login");
+//                                    }
                                 %>
                             </a></li>
                         <li data-toggle="modal" data-target="#registerModal"><a href="#">Signup</a></li>
-                        
-                        
+
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact us <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -76,16 +74,16 @@
                                     </a></li>
                             </ul>
                         </li>
-                        
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
+
+                        <li class="">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>Cart &nbsp; &nbsp;
                                 <span class="label label-danger pull-right" style="padding: 5px;" id="cart-value">0</span>
                             </a>
-                            
+
                             <ul class="dropdown-menu">
-                                <li data-toggle="modal" data-target="#checkoutModal">
-                                    <a href="#"><span class="glyphicon glyphicon-ok"></span> Checkout</a>
+                                <li data-toggle="modal" data-target="#payModal">
+                                    <a href="#"><span class="glyphicon glyphicon-ok"></span> Pay</a>
                                 </li>
                             </ul>
                         </li>
