@@ -164,7 +164,7 @@
 
                         <!-- Modal Body -->
                         <hr style="opacity: 0.6">
-                        <div class="row">
+                        <div class="row" id="checkout-body">
                             <div class="col-md-3">
                                 <img src="assets/img/dummyimg.png">
                             </div>

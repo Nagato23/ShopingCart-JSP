@@ -435,4 +435,36 @@
 
 </div>
 
+<script type="text/javascript">
+    function DisplayCartItems() {
+
+    $.ajax({
+        type: "GET",
+        url: 'Checkout',
+        data: {session : '<%=session.getAttribute("cartDetails")%>'},
+        success: function (message) {
+
+            if (message === "invalid")
+            {
+                alert("Invalid cart item.");
+            }
+            else
+            {
+                cartContents = document.getElementById('checkout-body');
+
+                cartContents.innerHTML = message;
+
+                alert("Please feel free to view all items");
+                
+                $('#modal-show-btn').show();
+            }
+        },
+        error: function () {
+            alertify.alert('Login failure', "Please verify your email or password");
+        }
+    });
+
+}
+</script>
+
 <%@include file="footer.jsp" %>

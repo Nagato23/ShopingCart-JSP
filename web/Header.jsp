@@ -84,10 +84,11 @@
                             </a>
                             
                             <ul class="dropdown-menu">
-                                <li data-toggle="modal" data-target="#checkoutModal">
-                                    <a href="#"><span class="glyphicon glyphicon-ok"></span> Checkout</a>
+                                <li onclick="DisplayCartItems();">
+                                    <a onclick="DisplayCartItems();"><span class="glyphicon glyphicon-ok"></span> Checkout</a>
                                 </li>
                             </ul>
+                            <button hidden="true" id="modal-show-btn" type="button" data-toggle="modal" data-target="#checkoutModal"></button>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-center" role="search">

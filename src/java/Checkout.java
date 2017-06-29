@@ -6,11 +6,14 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import sarpestein.DBHelper;
 
 /**
  *
@@ -32,16 +35,90 @@ public class Checkout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Checkout</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Checkout at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String it = request.getParameter("session");
+            
+            //return all checked items
+            HttpSession session = request.getSession(true);
+            
+            String itemsString = (String)session.getAttribute("cartDetails");
+            
+            //(id:%s-price:%s);
+            if (itemsString == null || itemsString == ""){
+                out.write("<h3>No Items in cart</h3>");
+            }
+            
+            String[] items = itemsString.split(";");
+            String finalText = "";
+
+            for (String item : items) {
+                String id = "";
+                String price = "";
+
+                id = item.replace("(", "").replace(")", "").split("-")[0].split(":")[1];
+                price = item.replace("(", "").replace(")", "").split("-")[1].split(":")[1];
+                
+                DBHelper db = new DBHelper();
+                ResultSet set = db.ExecuteQuery("SELECT * FROM catalogue WHERE id = " + id);
+
+                try {
+                    while (set.next()) {
+
+                        if (set.getString("type").toLowerCase().equals("laptop")) {
+
+                            finalText += String.format("<div class=\"row\">\n"
+                                    + "<div class=\"col-md-3\">\n"
+                                    + "<img src=\"assets/img/%s\">\n"
+                                    + "</div>\n"
+                                    + "<div class=\"col-md-9\">\n"
+                                    + "<h3 id=\"items-title\">%s</h3>\n"
+                                    + "<p>\n"
+                                    + "Supplier: <a href=\"\" id=\"items-supplier\"> %s </a> <br>\n"
+                                    + "RAM: <a href=\"\"  id=\"items-ram\"> %s</a> <br>\n"
+                                    + "Storage Size: <a href=\"\"  id=\"items-storage-size\"> %s</a> <br>\n"
+                                    + "Screen Size: <a href=\"\" id=\"items-screen-size\"> %s</a>\"\n"
+                                    + "</p>\n"
+                                    + "</div>\n"
+                                    + "</div>\n"
+                                    + "<hr>",
+                                    "laptops/" + set.getString("picturePath"),
+                                    set.getString("brandName") + " " + ((set.getString("model") == null) ? "" : set.getString("model")),
+                                    "N " + set.getString("cost"),
+                                    set.getString("supplier"),
+                                    set.getString("ram") + "GB",
+                                    set.getString("StorageSize") + "GB",
+                                    set.getString("screenSize") + "GB");
+                        } else {
+                            //
+                            finalText += String.format("<div class=\"row\">\n"
+                                    + "<div class=\"col-md-3\">\n"
+                                    + "<img src=\"assets/img/%s\">\n"
+                                    + "</div>\n"
+                                    + "<div class=\"col-md-9\">\n"
+                                    + "<h3 id=\"items-title\">%s</h3>\n"
+                                    + "<p>\n"
+                                    + "Supplier: <a href=\"\" id=\"items-supplier\"> %s </a> <br>\n"
+                                    + "RAM: <a href=\"\"  id=\"items-ram\"> %s</a> <br>\n"
+                                    + "Storage Size: <a href=\"\"  id=\"items-storage-size\"> %s</a> <br>\n"
+                                    + "Screen Size: <a href=\"\" id=\"items-screen-size\"> %s</a>\"\n"
+                                    + "</p>\n"
+                                    + "</div>\n"
+                                    + "</div>\n"
+                                    + "<hr>",
+                                    "laptops/" + set.getString("picturePath"),
+                                    set.getString("brandName") + " " + ((set.getString("model") == null) ? "" : set.getString("model")),
+                                    "N " + set.getString("cost"),
+                                    set.getString("supplier"),
+                                    set.getString("ram") + "GB",
+                                    set.getString("StorageSize") + "GB",
+                                    set.getString("screenSize") + "GB");
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+            out.println(finalText);
         }
     }
 

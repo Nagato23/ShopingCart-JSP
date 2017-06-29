@@ -91,31 +91,3 @@ function addToCart(id) {
     
 }
 
-function addToCart(id) {
-    id = id.replace("cart-item-", "");
-
-    $.ajax({
-        type: "GET",
-        url: 'AddItemToCart',
-        data: {id: id},
-        success: function (message) {
-
-            if (message === "invalid")
-            {
-                alert("Invalid cart item.");
-            }
-            else
-            {
-                cartContents = document.getElementById('cart-value');
-
-                cartContents.innerHTML = message;
-
-                alert("Successfully Added item to cart");
-            }
-        },
-        error: function () {
-            alertify.alert('Login failure', "Please verify your email or password");
-        }
-    });
-
-}
