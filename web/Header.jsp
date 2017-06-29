@@ -77,10 +77,17 @@
                             </ul>
                         </li>
                         
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cart &nbsp; &nbsp;
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>Cart &nbsp; &nbsp;
                                 <span class="label label-danger pull-right" style="padding: 5px;" id="cart-value">0</span>
                             </a>
+                            
+                            <ul class="dropdown-menu">
+                                <li data-toggle="modal" data-target="#checkoutModal">
+                                    <a href="#"><span class="glyphicon glyphicon-ok"></span> Checkout</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-center" role="search">

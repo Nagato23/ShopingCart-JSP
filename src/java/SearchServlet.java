@@ -42,7 +42,7 @@ public class SearchServlet extends HttpServlet {
             double ram = (request.getParameter("ram").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("ram"));
             double screenSize = (request.getParameter("screenSize").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("screenSize"));
             double storageSize = (request.getParameter("storageSize").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("storageSize"));
-            double minCost = (request.getParameter("minCost").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("minCost"));
+            double minCost = (request.getParameter("cost").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("cost"));
             //double maxCost = (request.getParameter("maxCost").equals("")) ? 0.0 : Double.parseDouble(request.getParameter("maxCost"));
             
             Catalogue catalogue = new Catalogue();
@@ -88,7 +88,8 @@ public class SearchServlet extends HttpServlet {
                                 + "Screen Size: <a href=\"#\">%s</a> \n"
                                 + "</p> <br>"
                                 + "<p>"
-                                + "<a href=\"#\" class=\"btn btn-success\" role=\"button\">Add To Cart</a> "
+                                + "<a onclick=\"addToCart(this.id)\" id=\"cart-item-%s\" class=\"btn btn-danger\" role=\"button\">"
+                                + "<span class=\"glyphicon glyphicon-shopping-cart\"></span> Add To Cart</a> "
                                 + "<a href=\"#\" class=\"btn btn-primary\" role=\"button\">See Details</a>"
                                 + "</p>\n"
                                 + "</div>\n"
@@ -104,7 +105,8 @@ public class SearchServlet extends HttpServlet {
                                 set.getString("supplier"),
                                 set.getString("ram") + "GB",
                                 set.getString("StorageSize") + "GB",
-                                set.getString("screenSize") + "GB");
+                                set.getString("screenSize") + "GB",
+                                set.getString("id"));
                     }
                     else
                         cartItem += String.format(
@@ -121,7 +123,8 @@ public class SearchServlet extends HttpServlet {
                                 + "Screen Size: <a href=\"#\">%s</a>  \n"
                                 + "</p> <br>"
                                 + "<p>"
-                                + "<a href=\"#\" class=\"btn btn-success\" role=\"button\">Add To Cart</a> "
+                                + "<a onclick=\"addToCart(this.id)\" id=\"cart-item-%s\" class=\"btn btn-danger\" role=\"button\">"
+                                + "<span class=\"glyphicon glyphicon-shopping-cart\"></span> Add To Cart</a> "
                                 + "<a href=\"#\" class=\"btn btn-primary\" role=\"button\">See Details</a>"
                                 + "</p>\n"
                                 + "</div>\n"
@@ -135,7 +138,8 @@ public class SearchServlet extends HttpServlet {
                                 set.getString("supplier"),
                                 set.getString("ram") + "GB",
                                 set.getString("StorageSize") + "GB",
-                                set.getString("screenSize") + "GB");
+                                set.getString("screenSize") + "GB",
+                                set.getString("id"));
                 }
             }
             catch(Exception ex)

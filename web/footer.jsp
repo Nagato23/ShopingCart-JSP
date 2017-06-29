@@ -153,6 +153,48 @@
             </div>
         </div>
 
+        <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="signinLabel" style="">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header info active text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Checkout</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- Modal Body -->
+                        <hr style="opacity: 0.6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="assets/img/dummyimg.png">
+                            </div>
+                            <div class="col-md-9">
+                                <h3 id="items-title">The title</h3>
+                                <p>
+                                    Supplier: <a href="" id="items-supplier"> </a> <br>
+                                    RAM: <a href=""  id="items-ram"></a> <br>
+                                    Storage Size: <a href=""  id="items-storage-size"></a> <br>
+                                    Screen Size: <a href="" id="items-screen-size"> </a>"
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        
+                        
+                        
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-success pull-left">Checkout</button>
+                            <button type="submit" data-dismiss="modal" class="btn btn-default pull-left">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
         
         <!--Footer end -->
         <!--Jquery file  -->
