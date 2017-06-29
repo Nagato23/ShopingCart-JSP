@@ -12,7 +12,7 @@ import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import com.mysql.jdbc.Driver;
+import java.sql.SQLException;
 
 /**
  *
@@ -89,18 +89,51 @@ public class DBHelper {
             
             String currentLine;
             
+            String[] brands = {"acerlap", "acertab",
+                    "hplap", "hptab",
+                    "asuslap", "asustab",
+                    "lenovolap", "lenovotab",
+                    "delllap", "delltab",
+                    "samsunglap", "samsungtab",
+                    "sonylap", "sonytab",
+                    "tecnotab"
+                };
+                int[] brandscount = {63, 11,
+                    63, 10,
+                    10, 10,
+                    10, 10,
+                    61, 10,
+                    13, 51,
+                    11, 10,
+                    44
+                };
+            
             while ((currentLine = br.readLine()) != null)
             {
                 String[] specs =currentLine.split(";");
+            
+                int[] counters = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                String imgPath = "";
+                String brandType = specs[1].toLowerCase() + specs[0].substring(0, 4).toLowerCase();
+                for (int i = 0; i < brands.length; i++) {
+                    if (specs[0].equals(brands[i])) {
+                        int count = counters[i];
+                        imgPath = brands[i].substring(0, brands[i].length() - 3).toLowerCase() + count + ".jpg";
+                        counters[i] = (counters[i] + 1) % brandscount[i];
+                    }
+
+                }
+                
                 
                 String query = 
                         String.format(
-                                "INSERT INTO catalogue(type, brandName, ram, storageSize, screenSize, cost, supplier) "
-                                        + " VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
+                                "INSERT INTO catalogue(type, brandName, ram, storageSize, screenSize, cost, supplier, picturePath) "
+                                        + " VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
                                 specs[0], specs[1],
                                 Double.parseDouble(specs[2]), Double.parseDouble(specs[3]),
                                 Double.parseDouble(specs[4]), Double.parseDouble(specs[5]),
-                                Double.parseDouble(specs[6])
+                                Double.parseDouble(specs[6]),
+                                imgPath
                         );
                 
                 this.ExecuteInsert(query);
@@ -134,6 +167,41 @@ public class DBHelper {
         }
     }
     
+    public static int CountItems(ResultSet resultSet)
+    {
+//        int count = 0;
+//        try
+//        {
+//            while(resultSet.next())
+//            {
+//                count++;
+//            }
+//        }
+//        catch (Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//        System.out.println(count);
+//        return count;
+        
+        if (resultSet == null) {
+            return 0;
+        }
+        try {
+            resultSet.last();
+            return resultSet.getRow();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        } finally {
+            try {
+                resultSet.beforeFirst();
+            } catch (SQLException exp) {
+                exp.printStackTrace();
+            }
+        }
+        return 0;
+    }
+    
     
     public ResultSet ExecuteQuery(String query)
     {
@@ -146,7 +214,7 @@ public class DBHelper {
             {
                 ResultSet set = st.executeQuery(query);
                 
-                if( !(set.equals(null) || set.next()) )
+                if( !set.equals(null) )
                 {
                     return set;
                 }
@@ -157,7 +225,6 @@ public class DBHelper {
         {
            ex.printStackTrace();
         }
-        
         return null;
     }
     
@@ -194,5 +261,23 @@ public class DBHelper {
         }
         
         return id;
+    }
+    
+    public static String  GenertatQueryStringFromID(String[] ids)
+    {
+        String partQuery = "SELECT * FROM catalogue WHERE ";
+        
+        if(ids != null)
+        {
+            int i = 1;
+            for (String id : ids) {
+                if (i++ == ids.length) {
+                    partQuery += String.format("id = %s", id);
+                    break;
+                }
+                partQuery += String.format("id = %s OR ", id);
+            }
+        }
+        return partQuery;
     }
 }
